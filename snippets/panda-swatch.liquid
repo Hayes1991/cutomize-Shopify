@@ -1,0 +1,944 @@
+{% if product %}
+  {% assign psUseProduct = product %}
+{% elsif item %}
+  {% assign psUseProduct = item %}
+{% elsif prod %}
+  {% assign psUseProduct = prod %}
+{% endif %}
+
+{% if panda-swatch == "product" %}
+    <script>
+    //functions to hide the selectors.
+    var psClosestByTag = function(el, tag) {
+      while (el.tagName != tag) {
+        el = el.parentNode;
+        if (!el) {
+          return null;
+        }
+      }
+      return el;
+    }
+
+    var psHaveClass = function(element, cls) {
+      return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+    }
+
+    var psGetPsConts = function(productId) {
+        return document.getElementsByClassName("panda-swatches-cont-" + productId);
+    }
+
+    function psGetFormElem(productId) {
+        var psCont = psGetPsConts(productId);
+
+        if(psCont[0]) {
+            var formEl = psClosestByTag(psCont[0], "FORM");
+
+            if(formEl) {
+                return formEl;
+            } else {
+                 return false;
+            }
+        }
+    }
+
+    var psHideElem{{ psUseProduct.id }} = function(optionIndex, obs) {
+
+         var formEl = psGetFormElem({{ psUseProduct.id }});
+
+          if(formEl) {
+            var selector3 = formEl.getElementsByClassName("selector-wrapper");
+            var selector2 = formEl.getElementsByClassName("radio-wrapper");
+            var selector1 = formEl.getElementsByClassName("inline-field-wrapper");
+            var selector4 = formEl.getElementsByClassName("product-form__item");
+            var selector5 = formEl.getElementsByClassName("single-option-selector");
+            var selector6 = formEl.getElementsByClassName("variant-wrapper");
+            var selector7 = formEl.getElementsByClassName("select-wrapper");
+            var selector8 = formEl.getElementsByClassName("option");
+            var selector9 = formEl.getElementsByClassName("form-field-select-wrapper");
+            var selector10 = formEl.getElementsByClassName("product-single__variants");
+            var selector11 = formEl.getElementsByClassName("swatches--color");
+            var selector12 = formEl.getElementsByClassName("single-option-selector-product-template");
+            var selector13 = formEl.getElementsByClassName("label");
+
+            var swatchSelector = formEl.getElementsByClassName("swatch");
+            var swatchSelector2 = formEl.getElementsByClassName("tawcvs-swatches");
+
+            if(swatchSelector && swatchSelector[optionIndex]) {
+              swatchSelector[optionIndex].style.cssText = 'display:none !important';
+            }
+
+            if((selector12 && !selector12[optionIndex]) && swatchSelector2 && swatchSelector2[optionIndex]) {
+              swatchSelector2[optionIndex].parentNode.parentNode.style.cssText = 'display:none !important';
+            }
+
+            if(selector12 && selector12[optionIndex] && selector13 && selector13[optionIndex]) {
+              selector13[optionIndex].parentNode.style.cssText = 'display:none !important';
+              selector12[optionIndex].parentNode.parentNode.style.cssText = 'display:none !important';
+              return;
+            }
+
+            if(selector11 && selector11[0]) {
+              selector11[0].style.cssText = 'display:none !important';
+
+              if(selector11[1]) {
+              selector11[1].style.cssText = 'display:none !important';
+              }
+            }
+
+            if(selector1 && selector1[optionIndex]) {
+              selector1[optionIndex].style.cssText = 'display:none !important';
+              return;
+            }
+
+            if(selector2 && selector2[optionIndex]) {
+              selector2[optionIndex].style.cssText = 'display:none !important';
+            }
+
+            if(swatchSelector && swatchSelector[optionIndex]) {
+              swatchSelector[optionIndex].style.cssText = 'display:none !important';
+            }
+
+            if(selector7 && selector7[optionIndex]) {
+              if(!selector7[optionIndex].classList.contains('product-options')) {
+                selector7[optionIndex].parentNode.parentNode.style.cssText = 'display:none !important';
+              } else {
+                selector7[optionIndex].parentNode.style.cssText = 'display:none !important';
+              }
+            }
+
+            if(selector3 && selector3[optionIndex]
+                && !selector3[optionIndex].classList.contains("product-qty")
+                && !selector3[optionIndex].classList.contains("quantity")) {
+
+              if(selector3.length <= 1 && selector3[optionIndex].parentNode.classList.contains("select")) {
+                selector3[optionIndex].parentNode.style.cssText = 'display:none !important';
+              }
+
+              if(selector3[optionIndex].parentNode.classList.contains("inline-option")) {
+                selector3[optionIndex].parentNode.style.cssText = 'display:none !important';
+              }
+
+              selector3[optionIndex].style.cssText = 'display:none !important';
+              return;
+            }
+
+            if(selector4 && selector4[optionIndex] && !selector4[optionIndex].classList.contains("product-form__item--submit")) {
+              selector4[optionIndex].style.cssText = 'display:none !important';
+            }
+
+            if(selector5 && selector5[optionIndex]) {
+              if(selector5[optionIndex].parentNode.classList.contains("styled-select")) {
+                selector5[optionIndex].parentNode.style.cssText = 'display:none !important';
+              }
+
+              if(selector5[optionIndex].parentNode.parentNode.classList.contains("form__control")) {
+                selector5[optionIndex].parentNode.parentNode.style.cssText = 'display:none !important';
+              } else if(selector5[optionIndex].parentNode.parentNode.parentNode.classList.contains("form__control")) {
+                selector5[optionIndex].parentNode.parentNode.parentNode.style.cssText = 'display:none !important';
+              }
+
+              selector5[optionIndex].style.display = 'none';
+            }
+
+            if(selector6 && selector6[optionIndex]) {
+              selector6[optionIndex].style.cssText = 'display:none !important';
+            }
+
+            if(swatchSelector && swatchSelector[optionIndex]) {
+              swatchSelector[optionIndex].style.cssText = 'display:none !important';
+            }
+
+            if(selector8 && selector8[optionIndex]) {
+              selector8[optionIndex].style.cssText = 'display:none !important';
+              return;
+            }
+
+            if(selector9 && selector9[optionIndex]) {
+              selector9[optionIndex].style.cssText = 'display:none !important';
+            }
+
+            if(selector10 && selector10[optionIndex]) {
+              if(selector10[optionIndex].parentNode.classList.contains("variant-group")) {
+                selector10[optionIndex].parentNode.style.cssText = 'display:none !important';
+              }
+
+              selector10[optionIndex].style.cssText = 'display:none !important';
+            }
+
+            if(swatchSelector && swatchSelector[optionIndex]) {
+              swatchSelector[optionIndex].style.cssText = 'display:none !important';
+            }
+          }
+      }
+    </script>
+{% endif %}
+
+{% comment %}
+  Set settings
+{% endcomment %}
+
+{% assign collection_switch_images = false %}
+{% assign collection_redirect_url = false %}
+{% assign collection_show_one_swatch = 1 %}
+{% assign show_swatch_in_header = false %}
+{% assign linked_options = nil %}
+
+{% comment %}
+  Start our code of the html.
+{% endcomment %}
+
+  {% assign choosenOptions = "Colors |ps-split| Size |ps-split| " | split: ' |ps-split| ' %}
+  {% assign collectionOptions = "Colors |ps-split| Size |ps-split| " | split: ' |ps-split| ' %}
+  {% assign optionsNames = "Colors |ps-split| Size |ps-split| " | split: ' |ps-split| ' %}
+  {% assign defaultStyleOptions = "" | split: ' |ps-split| ' %}
+
+  {% assign shopifyDomain = shop.permanent_domain | replace : ".myshopify.com", "" %}
+
+  {% if psUseProduct.options.size > 1 or psUseProduct.options.size == 1 and psUseProduct.options[0] != "Title" %}
+    {% for option in psUseProduct.options_with_values %}
+
+      {% if choosenOptions contains option.name %}
+
+        {% if defaultStyleOptions contains option.name %}
+			{% assign useDefaultStyle = true %}
+		{% else %}
+			{% assign useDefaultStyle = nil %}
+		{% endif %}
+
+		{% comment %}
+			Parse the name of the option for the URL.
+		{% endcomment %}
+
+		{% assign parsedOptionName = option.name
+            | replace: " ", "-"
+            | replace: "(", "1"
+            | replace: ")", "2"
+            | replace: "'", "3"
+            | replace: "é", "e"
+            | replace: "å", "a"
+            | replace: "+", "4"
+            | replace: "#", "5"
+            | replace: ".", "6"
+            | replace: "/", "7"
+            | replace: "*", "8"
+            | replace: "&", "9"
+            | replace: "!", "10"
+            | replace: "@", "11"
+            | replace: "%", "12"
+            | replace: "|", "13"
+            | replace: "^", "14"
+            | replace: "$", "15"
+            | replace: "?", "16"
+            | replace: "\", "17"
+            | replace: ",", "18"
+            | replace: '"', "%22"
+            | replace: "--", "-"
+            | replace: "--", "-" %}
+
+		{% for optionName in choosenOptions %}
+			{% if optionName == option.name %}
+				{% assign panda-swatch-name = optionsNames[forloop.index0] %}
+				{% break; %}
+			{% endif %}
+		{% endfor %}
+
+		{% assign option_index = forloop.index0 %}
+        {% assign option_index_to_hide = forloop.index %}
+        {% assign optionIndex = "option" | append: option_index_to_hide %}
+		{% assign selected = "" %}
+
+        {% if panda-swatch == "product" %}
+
+          <div class="panda-swatches-cont-{{ psUseProduct.id }} panda-swatches-cont ps-align-left clearfix" data-option-name="{{ option.name }}" data-changed-option-name="{{ panda-swatch-name }}" data-option-index="{{ option_index }}">
+            {% if show_swatch_in_header %}
+                <label class="panda-header">{{ panda-swatch-name }}: {{ psUseProduct.selected_or_first_available_variant[optionIndex] }}</label>
+            {% else %}
+                <label class="panda-header">{{ panda-swatch-name }}</label>
+            {% endif %}
+
+            {% for value in option.values %}
+
+              {% comment %}
+                Parse the name of the swatch for the URL.
+              {% endcomment %}
+
+              {% assign parsedSwatchName = value
+              | replace: " ", "-"
+              | replace: "(", "1"
+              | replace: ")", "2"
+              | replace: "'", "3"
+              | replace: "é", "e"
+              | replace: "å", "a"
+              | replace: "+", "4"
+              | replace: "#", "5"
+              | replace: ".", "6"
+              | replace: "/", "7"
+              | replace: "*", "8"
+              | replace: "&", "9"
+              | replace: "!", "10"
+              | replace: "@", "11"
+              | replace: "%", "12"
+              | replace: "|", "13"
+              | replace: "^", "14"
+              | replace: "$", "15"
+              | replace: "?", "16"
+              | replace: "\", "17"
+              | replace: ",", "18"
+              | replace: '"', "%22"
+              | replace: "--", "-"
+              | replace: "--", "-" %}
+
+              {% assign selected = "" %}
+
+              {% if psUseProduct.selected_or_first_available_variant[optionIndex] == value  %}
+                  {% assign selected = "ps-selected" %}
+              {% endif %}
+
+              <div class="panda-swatch {% if useDefaultStyle %}panda-swatch-default{% endif %} {{ selected }}" data-value="{{ value | replace: '"', '&quot;' | escape }}">
+
+                {% if linked_options == 'cross' %}
+                  <div class="ps-cross-out"></div>
+                {% endif %}
+
+                {% if useDefaultStyle %}
+                  	<span>{{ value }}</span>
+                {% else %}
+                    <div class="ps-image-cont" style="background-size: cover; background-color:{{ parsedSwatchName }};background-position: center center; background-image: url(https://s3-us-west-2.amazonaws.com/swatchify-static.sellerpanda.com/swatches/{{ shopifyDomain }}/{{ parsedOptionName }}/{{ parsedSwatchName }}.png);">
+                      
+                    </div>
+                    
+                    
+                {% endif %}
+              </div>
+
+            {% endfor %}
+
+          </div>
+
+          <script>
+            psHideElem{{ psUseProduct.id }}({{ option_index }});
+
+            var psObserverConfig = {
+              childList: true,
+              subtree: true,
+              attributes: false,
+              characterData: false
+            };
+
+            var psClassNamesToHide = [
+              "selector-wrapper",
+              "radio-wrapper",
+              "inline-field-wrapper",
+              "product-form__item",
+              "single-option-selector",
+              "variant-wrapper",
+              "select-wrapper",
+              "option",
+              "form-field-select-wrapper",
+              "product-single__variants"
+            ]
+
+            var psObs = new MutationObserver(function(mutations) {
+              mutations.forEach(function(mutation) {
+                if (!mutation.addedNodes) return;
+                mutation.addedNodes.forEach(function(addedNode) {
+                  psClassNamesToHide.forEach(function(elem) {
+                    if(psHaveClass(addedNode, elem)) {
+                      psHideElem{{ psUseProduct.id }}({{ option_index }}, psObs);
+                    }
+                  });
+
+                });
+              })
+            });
+
+            var psFormEl = psGetFormElem({{ psUseProduct.id }});
+
+            psObs.observe(psFormEl, psObserverConfig);
+
+          </script>
+        {% else %}
+            {% if collectionOptions contains option.name and useDefaultStyle == nil %}
+
+                {% assign valueCount = 1 %}
+                {% assign valueLeft = 0 %}
+                {% assign valuesSize = option.values.size %}
+                {% assign imageUrl = nil %}
+
+                {% if option.values.size > collection_show_one_swatch %}
+
+                  <div class="panda-swatches-coll-cont">
+                    {% for value in option.values %}
+
+                      {% if valueCount > 3 %}
+                          {% assign valueLeft = option.values.size | minus: 3 %}
+                          {% break %}
+                      {% else %}
+                          {% assign valueCount = valueCount | plus: 1 %}
+                      {% endif %}
+
+                    {% comment %}
+                      Parse the name of the swatch for the URL.
+                    {% endcomment %}
+
+                    {% assign parsedSwatchName = value
+                    | replace: " ", "-"
+                    | replace: "(", "1"
+                    | replace: ")", "2"
+                    | replace: "'", "3"
+                    | replace: "é", "e"
+                    | replace: "å", "a"
+                    | replace: "+", "4"
+                    | replace: "#", "5"
+                    | replace: ".", "6"
+                    | replace: "/", "7"
+                    | replace: "*", "8"
+                    | replace: "&", "9"
+                    | replace: "!", "10"
+                    | replace: "@", "11"
+                    | replace: "%", "12"
+                    | replace: "|", "13"
+                    | replace: "^", "14"
+                    | replace: "$", "15"
+                    | replace: "?", "16"
+                    | replace: "\", "17"
+                    | replace: ",", "18"
+                    | replace: '"', "%22"
+                    | replace: "--", "-"
+                    | replace: "--", "-" %}
+
+                    {% for variant in psUseProduct.variants %}
+                      {% if variant[optionIndex] != value %}
+                          {% continue %}
+                      {% endif %}
+
+                      {% assign variantUrl = variant.url %}
+
+                      {% if variant.image.src != nil %}
+                        {% assign imageUrl = variant.image.src | img_url: 'large' %}
+                        {% assign imageAspect = variant.image.aspect_ratio %}
+                        <script> img = new Image(); img.src = "{{ variant.image.src | img_url: 'large' }}";</script>
+                        {% break %}
+                      {% else %}
+                        {% assign imageUrl = nil %}
+                      {% endif %}
+
+                    {% endfor %}
+
+                    <div class="panda-swatch-coll{% if collection_switch_images == 1 and imageUrl != nil %} ps-have-image{% endif %}" data-src="{{ imageUrl }}" data-aspectRatio="{{ imageAspect }}" data-variant-url="{{ variantUrl }}">
+
+                      <div class="ps-image-cont" style="background-size: cover; background-color:{{ parsedSwatchName }};background-position: center center; background-image: url(https://s3-us-west-2.amazonaws.com/swatchify-static.sellerpanda.com/swatches/{{ shopifyDomain }}/{{ parsedOptionName }}/{{ parsedSwatchName }}.png);">
+
+                      </div>
+
+                    </div>
+
+                  {% endfor %}
+                    {% if valueLeft > 0 %}
+                    <label class="ps-have-more" data-src="{{ psUseProduct.url | within: collection }}">{{ valueLeft }} More</label>
+                    {% endif %}
+                  </div>
+
+                  {% break %}
+
+                {% endif %}
+            {% endif %}
+        {% endif %}
+
+      {% endif %}
+
+    {% endfor %}
+
+  {% endif %}
+
+{{ 'script_p.js' | asset_url | script_tag }}
+
+<script>
+(function() {
+
+    function getWrapperOption($, that) {
+        var option1 = $(that).closest('form').find('.inline-field-wrapper');
+        var option2 = $(that).closest('form').find('.selector-wrapper');
+        var option3 = $(that).closest('form').find('.radio-wrapper');
+        var option4 = $(that).closest('form').find('.product-form__item');
+        var option5 = $(that).closest('form').find('.single-option-selector');
+        var option6 = $(that).closest('form').find('.variant-wrapper');
+        var option7 = $(that).closest('form').find('.select-wrapper');
+        var option8 = $(that).closest('form').find('.option');
+        var option9 = $(that).closest('form').find('.form-field-select-wrapper');
+        var option10 = $(that).closest('form').find('.product-single__variants');
+        var option11 = $(that).closest('form').find('.single-option-selector-product-template');
+
+        if(option3.length && option3.find("fieldset").length) return [option3.find("fieldset"), "fieldset"];
+        if(option3.length && option3.find(".single-option-radio").length) return [option3.find(".single-option-radio"), "fieldset"];
+        if(option11.length) return [option11, "select"];
+        if(option7.length) return [option7.find("select"), "select"];
+        if(option1.length) return [option1.find("select"), "select"];
+        if(option2.length) return [option2.find("select"), "select"];
+        if(option4.length) return [option4.find("select"), "select"];
+        if(option5.length) return [option5, "select"];
+        if(option6.length && option6.find("fieldset").length) return [option6.find("fieldset"), "fieldset"];
+        if(option6.length && option6.find("select").length) return [option6.find("select"), "select"];
+        if(option8.length && option8.find("select").length) return [option8.find("select"), "select"];
+        if(option8.length) return [option8, "fieldset"];
+        if(option9.length) return [option9.find("select"), "select"];
+        if(option10.length) return [option10, "select"];
+
+        return [false];
+    }
+
+    function triggerEvent(el, type){
+       if ('createEvent' in document) {
+            // modern browsers, IE9+
+            var e = document.createEvent('HTMLEvents');
+            e.initEvent(type, false, true);
+            el.dispatchEvent(e);
+        } else {
+            // IE 8
+            var e = document.createEventObject();
+            e.eventType = type;
+            el.fireEvent('on'+e.eventType, e);
+        }
+    }
+
+{% if panda-swatch == "product" %}
+
+  var myAppJavaScript = function($) {
+
+    {% if linked_options %}
+      {% assign availableVariants = "" %}
+
+      {% for variant in psUseProduct.variants %}
+        {% if variant.available %}
+          {% assign variantTitleEscape = variant.title | escape | replace: '&#39;', "'" | replace: '&amp;' , '&'%}
+          {% assign availableVariants = availableVariants | append: '"' | append: variantTitleEscape | append: '",' %}
+        {% endif %}
+      {% endfor %}
+
+      var psVaraintsAvailable = [{{ availableVariants }}];
+
+      var findContInter = setInterval(function() {
+        var varWrapper = getWrapperOption($, $(".panda-swatches-cont .panda-swatch")[0]);
+
+        if(varWrapper[0] != false) {
+          clearInterval(findContInter);
+
+            if(varWrapper[1].length == 1) {
+                $(".panda-swatches-cont").each(function() {
+                    var option = $(this).data("optionIndex");
+
+                    $(this).find(".panda-swatch").each(function() {
+                      var value = $(this).data("value").toString();
+
+                      {% if linked_options == "hide" %}
+                      if(psVaraintsAvailable.indexOf(value) !== -1 ) {
+                        $(this).removeClass("ps-hide");
+                      } else {
+                        $(this).addClass("ps-hide");
+                      }
+                      {% else %}
+                        if(psVaraintsAvailable.indexOf(value) !== -1 ) {
+                          $(this).removeClass("ps-crossed");
+                        } else {
+                          $(this).addClass("ps-crossed");
+                        }
+                      {% endif %}
+                    });
+
+                    {% if linked_options == "hide" %}
+                      if($(this).find(".ps-selected.ps-hide").length > 0) {
+                        $(this).find(".panda-swatch:visible:first").click();
+                      }
+                    {% else %}
+                      if($(this).find(".ps-selected.ps-crossed").length > 0) {
+                        $(this).find(".panda-swatch:not('.ps-crossed'):first").click();
+                      }
+                    {% endif %}
+                  });
+              } else {
+                  var i = 0;
+                  varWrapper[0].each(function(){ $(this).data("ps-option-num", i++)});
+
+                  varWrapper[0].change(function() {
+                    var optionNum = $(this).data("ps-option-num");
+                    var changeToVal = $(this).val();
+                    var firstVal = $(varWrapper[0][0]).val();
+                    var psAvailableSwatches = { 0: [], 1: [], 2: [] };
+                    var psFirstAvailableSwatches = [];
+
+                    psVaraintsAvailable.forEach(function(variantTitle) {
+                      var variantTitleArr = variantTitle.split(" / ");
+
+                      if(variantTitleArr[optionNum] == changeToVal) {
+                        if(optionNum != 0) {
+                          psAvailableSwatches[0].push(variantTitleArr[0]);
+                        }
+
+                        if(optionNum != 1) {
+                          psAvailableSwatches[1].push(variantTitleArr[1]);
+                        } else {
+                          if(variantTitleArr[0] == firstVal) {
+                            psAvailableSwatches[2].push(variantTitleArr[2]);
+                          }
+                        }
+
+                        if(optionNum != 2 && optionNum != 1) {
+                          psAvailableSwatches[2].push(variantTitleArr[2]);
+                        }
+                      }
+
+                      psFirstAvailableSwatches.push(variantTitleArr[0]);
+
+                    });
+
+                    $(".panda-swatches-cont").each(function() {
+                      var option = $(this).data("optionIndex");
+
+                      if(option == 0) {
+                        $(this).find(".panda-swatch").each(function() {
+                          var value = $(this).data("value");
+
+                          {% if linked_options == "hide" %}
+                          if(psFirstAvailableSwatches.indexOf(value.toString()) !== -1 ) {
+                            $(this).removeClass("ps-hide");
+                          } else {
+                            $(this).addClass("ps-hide");
+                          }
+                          {% else %}
+                            if(psFirstAvailableSwatches.indexOf(value.toString()) !== -1 ) {
+                              $(this).removeClass("ps-crossed");
+                            } else {
+                              $(this).addClass("ps-crossed");
+                            }
+                          {% endif %}
+                        });
+
+                        {% if linked_options == "hide" %}
+                          if($(this).find(".ps-selected.ps-hide").length > 0) {
+                            $(this).find(".panda-swatch:visible:first").click();
+                          }
+                        {% else %}
+                          if($(this).find(".ps-selected.ps-crossed").length > 0) {
+                            $(this).find(".panda-swatch:not('.ps-crossed'):first").click();
+                          }
+                        {% endif %}
+
+                        return true;
+                      }
+
+                      if(option <= optionNum) {
+                          return true;
+                      }
+
+                      $(this).find(".panda-swatch").each(function() {
+                        var value = $(this).data("value");
+
+                        {% if linked_options == "hide" %}
+                        if(psAvailableSwatches[option].indexOf(value.toString()) !== -1 ) {
+                          $(this).removeClass("ps-hide");
+                        } else {
+                          $(this).addClass("ps-hide");
+                        }
+                        {% else %}
+                          if(psAvailableSwatches[option].indexOf(value.toString()) !== -1 ) {
+                            $(this).removeClass("ps-crossed");
+                          } else {
+                            $(this).addClass("ps-crossed");
+                          }
+                        {% endif %}
+                      });
+
+                      {% if linked_options == "hide" %}
+                        if($(this).find(".ps-selected.ps-hide").length > 0) {
+                          $(this).find(".panda-swatch:visible:first").click();
+                        }
+                      {% else %}
+                        if($(this).find(".ps-selected.ps-crossed").length > 0) {
+                          $(this).find(".panda-swatch:not('.ps-crossed'):first").click();
+                        }
+                      {% endif %}
+                    });
+                  });
+
+                  triggerEvent(varWrapper[0][0], "change");
+          }
+        }
+      }, 1000);
+
+    {% endif %}
+
+    $(".panda-swatches-cont").each(function() {
+
+      var option = $(this).data("optionIndex");
+      var that = this;
+
+      var varWrapper = getWrapperOption($, this);
+
+        if(varWrapper[0] != false) {
+          $($(varWrapper[0])[option]).change(function() {
+          	var value = $(this).val();
+
+            $(that).find(".panda-swatch[data-value='" + escape(value) + "']:not(.ps-selected)").click();
+          });
+        }
+    });
+
+    $(".panda-swatches-cont .panda-swatch").click(function() {
+
+      if($(this).hasClass("ps-crossed") || $("body").hasClass("js-drawer-open")) {
+      	return;
+      }
+
+      varWrapper = getWrapperOption($, this);
+
+      var changedOptionName = $(this).parent().data("changedOptionName");
+      var swatchName = $(this).attr("data-value");
+      var optionIndex = $(this).closest(".panda-swatches-cont").attr("data-option-index");
+
+      {% if show_swatch_in_header %}
+        $(this).siblings(".panda-header").text(changedOptionName + ": " + swatchName);
+      {% endif %}
+
+      $(this).closest(".panda-swatches-cont").find(".panda-swatch.ps-selected").removeClass("ps-selected");
+      $(this).addClass("ps-selected");
+
+      if(varWrapper[0]) {
+        switch(varWrapper[1]) {
+          case "select":
+            swatchName = swatchName.replace('&quot;', '"');
+
+            var wrapper = $(varWrapper[0][optionIndex])
+
+            var typeOfValue = /^\d+$/.test($(varWrapper[0][optionIndex]).find('option').attr('value'));
+
+            if(typeOfValue && $(varWrapper[0][optionIndex]).find('option[data-title="' + swatchName + '"]').length > 0) {
+              var swatchName = $(varWrapper[0][optionIndex]).find('option[data-title="' + swatchName + '"]').val();
+            }
+
+            $(varWrapper[0][optionIndex]).val(swatchName).trigger('change');
+
+            triggerEvent(varWrapper[0][optionIndex], "change");
+            $(".swatch").eq(optionIndex).find("div[data-value='"+ swatchName +"']").click();
+            break;
+
+          case "fieldset":
+            $(varWrapper[0][optionIndex]).find('input[value="' + swatchName + '"]').trigger('click');
+            break;
+
+          default:
+            console.log("Swatchify Didn't found warapper.", varWrapper);
+            break;
+      	}
+      } else {
+      	console.log("Swatchify Didn't found warapper.", varWrapper);
+      }
+    });
+  	//console.log($.fn.jquery);
+  }
+
+{% else %}
+
+  var myAppJavaScript = function($) {
+
+    var psImageWidth = null;
+
+    $(".panda-swatches-coll-cont .panda-swatch-coll.ps-have-image").click(function(e) {
+
+      if ('click' == 'mouseenter' && ("ontouchstart" in document.documentElement)) {
+        return;
+      }
+
+      if(!$(this).data("changing")) {
+        $(this).data("changing", true);
+
+        var productWrapper19 = $(this).closest(".card");
+        var productWrapper2 = $(this).closest(".grid-product");
+        var productWrapper3 = $(this).closest(".grid-item");
+        var productWrapper4 = $(this).closest(".grid__item");
+        var productWrapper6 = $(this).closest(".product-item");
+        var productWrapper7 = $(this).closest(".main_box");
+        var productWrapper8 = $(this).closest(".thumbnail");
+        var productWrapper9 = $(this).closest(".product-preview");
+        var productWrapper = $(this).closest(".product-wrapper");
+        var productWrapper5 = $(this).closest(".product");
+        var productWrapper10 = $(this).closest(".product-list-item");
+        var productWrapper11 = $(this).closest(".product-block");
+        var productWrapper12 = $(this).closest(".product-inner");
+        var productWrapper13 = $(this).closest(".product-index");
+        var productWrapper14 = $(this).closest(".productgrid--item");
+        var productWrapper15 = $(this).closest(".o-layout__item");
+        var productWrapper16 = $(this).closest(".item");
+        var productWrapper17 = $(this).closest(".product-grid-item");
+        var productWrapper18 = $(this).closest(".product-collection");
+        var productWrapper20 = $(this).closest(".product-item-wrapper");
+        var productWrapper21 = $(this).closest(".list-container");
+        var productWrapper22 = $(this).closest(".packmule_dv");
+        var productWrapper23 = $(this).closest(".product-wrap");
+        var productWrapper24 = $(this).closest(".element");
+
+        var imgSrc = $(this).data("src");
+        var imgAspect = 1 / $(this).data("aspectratio") * 100;
+
+        if(productWrapper19.length) {
+          productWrapper = productWrapper19;
+        } else if(productWrapper9.length) {
+          productWrapper = productWrapper9;
+        } else if(productWrapper2.length) {
+          productWrapper = productWrapper2;
+        } else if(productWrapper6.length) {
+          productWrapper = productWrapper6;
+        } else if(productWrapper17.length) {
+          productWrapper = productWrapper17;
+        } else if(productWrapper3.length) {
+          productWrapper = productWrapper3;
+        } else if(productWrapper4.length) {
+          productWrapper = productWrapper4;
+        } else if(productWrapper7.length) {
+          productWrapper = productWrapper7;
+        } else if(productWrapper8.length) {
+          productWrapper = productWrapper8;
+        } else if(productWrapper.length) {
+          productWrapper = productWrapper;
+        } else if(productWrapper12.length) {
+          productWrapper = productWrapper12;
+        } else if(productWrapper23.length) {
+          productWrapper = productWrapper23;
+        } else if(productWrapper5.length) {
+          productWrapper = productWrapper5;
+        } else if(productWrapper10.length) {
+          productWrapper = productWrapper10;
+        } else if(productWrapper11.length) {
+          productWrapper = productWrapper11;
+        } else if(productWrapper13.length) {
+          productWrapper = productWrapper13;
+        } else if(productWrapper14.length) {
+          productWrapper = productWrapper14;
+        } else if(productWrapper15.length) {
+          productWrapper = productWrapper15;
+        } else if(productWrapper16.length) {
+          productWrapper = productWrapper16;
+        } else if(productWrapper18.length) {
+          productWrapper = productWrapper18;
+        } else if(productWrapper20.length) {
+          productWrapper = productWrapper20;
+        } else if(productWrapper21.length) {
+          productWrapper = productWrapper21;
+        } else if(productWrapper22.length) {
+          productWrapper = productWrapper22;
+        } else if(productWrapper24.length) {
+          productWrapper = productWrapper24;
+        }
+
+        var imageCont = productWrapper.find("img:not(.ps-image):not(.shappify-sales-icon-collection)").first();
+
+        if({{ collection_switch_images }} === 1 && imgSrc && productWrapper.length > 0 && imageCont.attr("src") != imgSrc) {
+          imageCont.attr("src", imgSrc.replace("_large", "_large"));
+          imageCont.siblings("img").attr("src", imgSrc.replace("_large", "_large"));
+
+          if(!psImageWidth && imageCont.attr("srcset")) {
+          	var srcset = imageCont.attr("srcset");
+            var srcsetArr = [];
+
+            srcsetArr = srcset.split(".");
+            srcsetArr = srcsetArr[srcsetArr.length - 2].split("_");
+            srcsetArr = srcsetArr[srcsetArr.length - 1].split("@");
+
+            psImageWidth = srcsetArr[0];
+          }
+
+          if(imageCont.attr("srcset")) {
+          	imageCont.attr("srcset", imgSrc.replace("_large", "_" + psImageWidth));
+          	imageCont.attr("data-srcset", imgSrc.replace("_large", "_" + psImageWidth));
+          }
+
+          if(imageCont.hasClass("lazyautosizes")) {
+            imageCont.attr("data-src", imgSrc.replace("_large", "_{width}x")).attr("data-aspectratio", $(this).data("aspectratio")).addClass("lazyload");
+          }
+
+          if(productWrapper.find("img:not(.ps-image)").parent().prop("tagName") == "FIGURE" ) {
+            productWrapper.find("img:not(.ps-image)").parent().animate({opacity: 0}, 100, function() {
+              $(this).css("background-image", "url('" + imgSrc + "')").animate({opacity: 1}, 100)
+            })
+          }
+
+          e.stopPropagation();
+          e.preventDefault();
+        }
+
+        $(this).data("changing", false);
+
+      }
+    });
+
+    {% if collection_redirect_url %}
+      $(".panda-swatches-coll-cont .panda-swatch-coll").css("cursor", "pointer");
+      $(".panda-swatches-coll-cont .panda-swatch-coll").click(function(e) {
+        var variantUrl = $(this).data("variantUrl");
+
+        if(variantUrl) {
+        	document.location.href = variantUrl;
+        }
+
+        e.stopPropagation();
+        e.preventDefault();
+      })
+    {% endif %}
+
+    $(".panda-swatches-coll-cont .ps-have-more").click(function() {
+      var src = $(this).data("src");
+
+      document.location.href = src;
+    });
+  }
+{% endif %}
+
+  var loadScript = function(url, callback) {
+
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+
+    // If the browser is Internet Explorer.
+    if (script.readyState) {
+      script.onreadystatechange = function(){
+        if (script.readyState == "loaded" || script.readyState == "complete"){
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    // For any other browser.
+    } else {
+      script.onload = function(){
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName("head")[0].appendChild(script);
+
+  };
+
+    var psCountInters = 0;
+
+    var psIncludeJqueryInter = setInterval(function() {
+    if (!(typeof jQuery === 'undefined') || !(typeof $ === 'undefined')) {
+      if((typeof jQuery === 'undefined')) {
+        myAppJavaScript($);
+      } else {
+        myAppJavaScript(jQuery);
+      }
+        clearInterval(psIncludeJqueryInter);
+    }
+
+    if(psCountInters >= 10) {
+      loadScript('//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js', function(){
+        jQuery64 = jQuery.noConflict(true);
+        myAppJavaScript(jQuery64);
+      });
+      clearInterval(psIncludeJqueryInter);
+    }
+
+    psCountInters++;
+    }, 100);
+
+})()
+</script>
